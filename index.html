@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box">
+        <div class="form">
+            <section class="form-details">
+                <form id="form">
+                    <h2>LOGIN</h2>
+                    <div class="form-control">
+                        <span>Enter your Name : </span>
+                        <input type="text" id="name">
+                        <small>Error message</small>
+                    </div>
+                    <div class="form-control">
+                        <span>Enter your email : </span>
+                        <input type="email" id="emailId">
+                        <small>Error message</small>
+                    </div>
+                    <div class="form-control">
+                        <span>Enter Password : </span>
+                        <input type="password" id="p1">
+                        <small>Error message</small>
+                    </div>
+                    <div class="form-control">
+                        <span>Enter Password again : </span>
+                        <input type="password" id="p2">
+                        <small>Error message</small>
+                    </div>
+                    <div class="button">
+                        <button onclick="buttonClick()">Submit</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById("form");
+        const name = document.getElementById("name");
+        const email = document.getElementById("emailId");
+        const p1 = document.getElementById("p1");
+        const p2 = document.getElementById("p2");
+
+        form.addEventListener('submit', e =>{
+            e.preventDefault();
+            checkEmpty();
+            checkPassword();
+        });
+
+
+        function checkEmpty(){
+
+            const userameValue = name.value.trim();
+            const emailValue = email.value.trim();
+            const p1Value = p1.value.trim();
+            const p2Value = p2.value.trim();
+
+            if(userameValue === ""){
+                setError(name, "Name cannot be blank");
+            }else{
+                setSuccess(name);
+            }
+            
+            if(emailValue === ""){
+                setError(email, "Email cannot be blank");
+            }else{
+                setSuccess(email);
+            }
+            
+            if(p1Value === ""){
+                setError(p1, "Password cannot be blank");
+            }else{
+                setSuccess(p1);
+            }
+            
+            if(p2Value === ""){
+                setError(p2, "Password cannot be blank");
+            }else{
+                setSuccess(p2);
+            }
+
+            if(p1Value === p2Value){
+                setSuccess(p2);
+            }else{
+                alert("Password does not match")
+            }
+        }
+
+        function setError(input, message){
+            const formControl = input.parentElement;
+            const small = formControl.querySelector('small');
+            formControl.className = "form-control error";
+            small.innerText = message;
+        }
+
+        function setSuccess(input){
+            const formControl = input.parentElement;
+            formControl.className = "form-control success";
+        }
+    </script>
+</body>
+</html>
